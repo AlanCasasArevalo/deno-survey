@@ -1,9 +1,10 @@
-import {Router, RouterContext} from '../dependencies/deps.ts'
+import {Router} from '../dependencies/deps.ts'
 
-import testController from '../controllers/testController.ts'
+import authController from '../controllers/AuthController.ts'
 
 const router = new Router()
 
-router.get('/', testController.testController)
+router.post('/api/login', authController.login)
+router.post('/api/register', authController.register)
 
 export default router

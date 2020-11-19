@@ -16,6 +16,15 @@ await log.setup({
   }
 })
 
+app.use(async (ctx, next) => {
+  try {
+    await next()
+  } catch (error) {
+    ctx.response.body = 'Error en el servidor'
+    throw error
+  }
+})
+
 app.use(router.routes())
 app.use(router.allowedMethods())
 
