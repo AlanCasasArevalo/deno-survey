@@ -19,4 +19,5 @@ export type {
 } from "https://deno.land/x/oak@v6.3.2/router.ts";
 export * as _ from "https://deno.land/x/lodash@4.17.15-es/lodash.js"
 export { MongoClient } from "https://deno.land/x/mongo@v0.12.1/mod.ts";
+export { hashSync, compareSync } from "https://deno.land/x/bcrypt/mod.ts";
 
