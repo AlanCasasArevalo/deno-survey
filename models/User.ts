@@ -1,19 +1,14 @@
 import {usersCollection} from '../db/mongo.ts'
+import BaseModel from './BaseModel.ts'
 
-export interface UserInterface {
-  id?: string
-  name: string
-  email: string
-  password: string
-}
-
-export default class User implements UserInterface {
+export default class User extends BaseModel {
   public id?: string
   public name: string
   public email: string
   public password: string
 
   constructor({id = '', name = '', email = '', password = ''}) {
+    super()
     this.id = id
     this.name = name
     this.email = email
@@ -22,12 +17,8 @@ export default class User implements UserInterface {
 
   static async findOne(params: any) {
     const user = await usersCollection.findOne(params)
-    // @ts-ignore
-    user.id = user._id.$oid
-    // @ts-ignore
-    delete user._id
-    // @ts-ignore
-    return new User(user)
+    this.prepare(user)
+    return user
   }
 
   async save() {
@@ -35,5 +26,11 @@ export default class User implements UserInterface {
     const { $oid } = await usersCollection.insertOne(this);
     this.id = $oid;
     return this;
+  }
+
+  protected static prepare (data: any): User {
+    data = BaseModel.prepare(data)
+    const user = new User(data)
+    return user
   }
 }

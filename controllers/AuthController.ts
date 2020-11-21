@@ -1,5 +1,6 @@
-import {compareSync, create, decode, hashSync, RouterContext, verify, Payload, Header} from '../dependencies/deps.ts'
+import {compareSync, create, hashSync, Payload, RouterContext, verify} from '../dependencies/deps.ts'
 import User from '../models/User.ts'
+import response from './helpers/http-response-helper.ts'
 
 class AuthController {
   // @ts-ignore
@@ -22,7 +23,16 @@ class AuthController {
       return
     } else {
 
-      const isValidPassword = compareSync(password, user.password)
+      // @ts-ignore
+      const userPassword = user.password
+      // @ts-ignore
+      const userEmail = user.email
+      // @ts-ignore
+      const userId = user.id
+      // @ts-ignore
+      const userName = user.name
+
+      const isValidPassword = compareSync(password, userPassword)
       if (!isValidPassword) {
         response(ctx, 422, {
           message: 'La contraseña no es valida'
@@ -34,19 +44,19 @@ class AuthController {
         const expiration = Date.now() / 1000 + oneHour
 
         const payload: Payload = {
-          iss: user.email,
-          exp: expiration,
+          iss: userEmail,
+          exp: expiration
         }
 
         // @ts-ignore
-        const secretKey : string = Deno.env.get('JWT_SECRET_KEY') || ''
-        const jwt = await create({ alg: "HS512", typ: "JWT" }, payload, secretKey)
+        const secretKey: string = Deno.env.get('JWT_SECRET_KEY') || ''
+        const jwt = await create({alg: "HS512", typ: "JWT"}, payload, secretKey)
         const payloadDecoded = await verify(jwt, secretKey, "HS512")
 
         response(ctx, 200, {
-          id: user.id,
-          name: user.name,
-          email: user.email,
+          id: userId,
+          name: userName,
+          email: userEmail,
           token: jwt
         })
       }
@@ -92,11 +102,6 @@ class AuthController {
       }
     }
   }
-}
-
-const response = (ctx: RouterContext, status: number, body: object) => {
-  ctx.response.status = status
-  ctx.response.body = body
 }
 
 const registerFieldsValidation = (name: string, email: string, password: string): boolean => {

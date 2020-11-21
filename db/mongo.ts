@@ -5,4 +5,5 @@ client.connectWithUri("mongodb://localhost:27017");
 
 const db = client.database("deno_survey");
 export const usersCollection = db.collection("users");
+export const surveyCollection = db.collection("survey");
 
