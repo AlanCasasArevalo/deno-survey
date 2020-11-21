@@ -16,6 +16,7 @@ await log.setup({
   }
 })
 
+// @ts-ignore
 app.use(async (ctx, next) => {
   try {
     await next()

@@ -20,4 +20,7 @@ export type {
 export * as _ from "https://deno.land/x/lodash@4.17.15-es/lodash.js"
 export { MongoClient } from "https://deno.land/x/mongo@v0.12.1/mod.ts";
 export { hashSync, compareSync } from "https://deno.land/x/bcrypt/mod.ts";
+export { create, verify, decode } from "https://deno.land/x/djwt@v1.9/mod.ts"
+export type { Header, Payload } from "https://deno.land/x/djwt@v1.9/mod.ts";
 
+import "https://deno.land/x/dotenv@v1.0.1/load.ts";
