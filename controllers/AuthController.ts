@@ -1,6 +1,6 @@
 import {compareSync, create, hashSync, Payload, RouterContext, verify} from '../dependencies/deps.ts'
 import User from '../models/User.ts'
-import response from './helpers/http-response-helper.ts'
+import response from '../helpers/http-response-helper.ts'
 
 class AuthController {
   // @ts-ignore

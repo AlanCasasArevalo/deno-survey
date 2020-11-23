@@ -1,4 +1,4 @@
-import {RouterContext} from '../../dependencies/deps.ts'
+import {RouterContext} from '../dependencies/deps.ts'
 
 const response = (ctx: RouterContext, status: number, body: object) => {
   ctx.response.status = status

@@ -29,7 +29,7 @@ GET http://localhost:8000/api/survey
 Content-Type: application/json
 
 ###
-GET http://localhost:8000/api/survey/5fb90a43005ad3bf00f0e447
+GET http://localhost:8000/api/survey/5fb94ce6000ec3780051ccb
 Content-Type: application/json
 
 ###
@@ -37,21 +37,20 @@ POST http://localhost:8000/api/survey
 Content-Type: application/json
 
 {
-  "name": "Survey 1",
+  "name": "Survey 6",
   "description": "Lorem ipsum algo asi"
 }
 
 ###
-PUT http://localhost:8000/api/survey/1
+PUT http://localhost:8000/api/survey/5fb94cec00222c390051ccb4
 Content-Type: application/json
 
 {
-  "name": "Alan",
-  "email": "alan@test.com",
-  "password": "123456"
+  "name": "Survey 3",
+  "description": "Lorem ipsumsa"
 }
 
 ###
-DELETE http://localhost:8000/api/survey/1
+DELETE http://localhost:8000/api/survey/5fb94d9c0000516100a31c84
 Content-Type: application/json
 

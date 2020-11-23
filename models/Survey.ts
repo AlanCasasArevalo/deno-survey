@@ -30,9 +30,29 @@ export default class Survey extends BaseModel {
     return this
   }
 
+  async update({name, description}: { name: string, description: string }) {
+    const result = await surveyCollection.updateOne({_id: {$oid: this.id}}, {name, description})
+    if (result) {
+      this.name = name
+      this.description = description
+      return this
+    } else {
+      return null
+    }
+  }
+
+  async delete(id: string) {
+    const result = await surveyCollection.deleteOne({_id: {$oid: id}})
+    if (result) {
+      return 1
+    } else {
+      return null
+    }
+  }
+
   protected static prepare(data: any): Survey {
     data = BaseModel.prepare(data)
-    const survey = new Survey(data.id, data.name, data.description)
+    const survey = new Survey(data.userId, data.name, data.description)
     survey.id = data.id
     return survey
   }
