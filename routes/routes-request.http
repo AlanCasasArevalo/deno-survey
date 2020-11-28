@@ -10,6 +10,9 @@ Content-Type: application/json
   "email": "alan@test.com",
   "password": "123456"
 }
+
+> {% client.global.set("auth_token", response.body.token); %}
+
 ###
 POST http://localhost:8000/api/register
 Content-Type: application/json
@@ -27,14 +30,17 @@ Content-Type: application/json
 ###
 GET http://localhost:8000/api/survey
 Content-Type: application/json
+Authorization: Bearer {{auth_token}}
 
 ###
 GET http://localhost:8000/api/survey/5fb94ce6000ec3780051ccb
 Content-Type: application/json
+Authorization: Bearer {{auth_token}}
 
 ###
 POST http://localhost:8000/api/survey
 Content-Type: application/json
+Authorization: Bearer {{auth_token}}
 
 {
   "name": "Survey 6",
@@ -44,6 +50,7 @@ Content-Type: application/json
 ###
 PUT http://localhost:8000/api/survey/5fb94cec00222c390051ccb4
 Content-Type: application/json
+Authorization: Bearer {{auth_token}}
 
 {
   "name": "Survey 3",
@@ -51,6 +58,8 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:8000/api/survey/5fb94d9c0000516100a31c84
+DELETE http://localhost:8000/api/survey/5fb94ce6000ec3780051ccb3
 Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
 
