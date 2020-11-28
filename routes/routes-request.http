@@ -18,8 +18,8 @@ POST http://localhost:8000/api/register
 Content-Type: application/json
 
 {
-  "name": "Alan",
-  "email": "alan@test.com",
+  "name": "Elsa",
+  "email": "elsa@test.com",
   "password": "123456"
 }
 
@@ -33,7 +33,7 @@ Content-Type: application/json
 Authorization: Bearer {{auth_token}}
 
 ###
-GET http://localhost:8000/api/survey/5fb94ce6000ec3780051ccb
+GET http://localhost:8000/api/survey/5fc23600005d57b700c7f0fb
 Content-Type: application/json
 Authorization: Bearer {{auth_token}}
 
@@ -43,12 +43,12 @@ Content-Type: application/json
 Authorization: Bearer {{auth_token}}
 
 {
-  "name": "Survey 6",
+  "name": "Survey C",
   "description": "Lorem ipsum algo asi"
 }
 
 ###
-PUT http://localhost:8000/api/survey/5fb94cec00222c390051ccb4
+PUT http://localhost:8000/api/survey/5fc232d1007baf380076fc57
 Content-Type: application/json
 Authorization: Bearer {{auth_token}}
 
@@ -58,7 +58,7 @@ Authorization: Bearer {{auth_token}}
 }
 
 ###
-DELETE http://localhost:8000/api/survey/5fb94ce6000ec3780051ccb3
+DELETE http://localhost:8000/api/survey/5fb94cf000b707090051ccb5
 Content-Type: application/json
 Authorization: Bearer {{auth_token}}
 

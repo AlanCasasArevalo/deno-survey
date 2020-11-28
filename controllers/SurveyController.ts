@@ -2,10 +2,13 @@ import {RouterContext} from '../dependencies/deps.ts'
 import Survey from '../models/Survey.ts'
 import response from '../helpers/http-response-helper.ts'
 import {BaseSurveyController} from './BaseSurveyController.ts'
+import User from '../models/User.ts'
 
 class SurveyController extends BaseSurveyController {
   async getAllSurvey(ctx: RouterContext) {
-    const surveys = await Survey.findByUser('1')
+    const user = ctx.state.user as User
+    const userId = user.id ? user.id : '1'
+    const surveys = await Survey.findByUser(userId)
     ctx.response.body = surveys ? surveys : []
   }
 
@@ -13,7 +16,12 @@ class SurveyController extends BaseSurveyController {
   async getSurveyById(ctx: RouterContext) {
     const id = await ctx.params.id
     const survey = await this.findSurveyOrFail(id ? id : '', ctx)
-    if (!survey) {
+    if (survey === undefined) {
+      response(ctx, 401, {
+        message: 'Lo sentimos no puedes consultar este recurso'
+      })
+      return undefined
+    } else if (!survey) {
       response(ctx, 404, {
         message: 'Lo sentimos no hemos podido recuperar el recurso'
       })
@@ -26,7 +34,10 @@ class SurveyController extends BaseSurveyController {
   // @ts-ignore
   async postSurvey(ctx: RouterContext) {
     const {name, description} = await ctx.request.body().value
-    const survey = new Survey('1', name, description)
+
+    const user = ctx.state.user as User
+    const userId = user.id ? user.id : '1'
+    const survey = new Survey(userId, name, description)
 
     const surveySaved = await survey.create()
     if (surveySaved) {
