@@ -28,10 +28,9 @@ export default class Question extends BaseModel {
   }
 
   async create() {
-    // delete this.id
-    // const {$oid} = await questionCollection.insertOne(this)
-    // this.id = $oid
-    // return this
+    const {$oid} = await questionCollection.insertOne(this)
+    this.id = $oid
+    return this
   }
 
   async update(text: string, type: QuestionType, required: boolean, data: Object) {

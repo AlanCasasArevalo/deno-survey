@@ -72,7 +72,7 @@ Content-Type: application/json
 Authorization: Bearer {{auth_token}}
 
 ###
-GET http://localhost:8000/api/questions/5fc2376800a37d0500c7f0fe
+GET http://localhost:8000/api/questions/5fc4883f00376e0800fd3e7e
 Content-Type: application/json
 Authorization: Bearer {{auth_token}}
 
