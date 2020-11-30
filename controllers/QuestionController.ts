@@ -78,9 +78,26 @@ class QuestionController extends BaseSurveyController {
 
   // @ts-ignore
   async deleteQuestion(ctx: RouterContext) {
-    response(ctx, 201, {
-      message: 'Hola desde deleteSurvey'
-    })
+    const questionId = await ctx.params.id
+    const question = await Question.findQuestionById(questionId ? questionId : '')
+
+    if (question) {
+      const result = await question.delete(questionId ? questionId : '')
+      if (result === 1) {
+        response(ctx, 204, {})
+        return
+      } else {
+        response(ctx, 500, {
+          message: 'Lo sentimos no hemos podido borrar el recurso'
+        })
+        return
+      }
+    } else {
+      response(ctx, 404, {
+        message: 'Lo sentimos no hemos podido recuperar el recurso'
+      })
+      return
+    }
   }
 }
 

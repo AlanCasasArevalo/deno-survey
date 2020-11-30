@@ -82,7 +82,7 @@ Content-Type: application/json
 Authorization: Bearer {{auth_token}}
 
 {
-  "text": "How much you like Node?",
+  "text": "How much you Love React?",
   "type": "choice",
   "required": true,
   "data": {
@@ -102,11 +102,11 @@ Content-Type: application/json
 Authorization: Bearer {{auth_token}}
 
 {
-  "text": "How much you Love Node?"
+  "text": "How much you Love Deno?"
 }
 
 ###
-DELETE http://localhost:8000/api/questions/5fc2376800a37d0500c7f0fe
+DELETE http://localhost:8000/api/questions/5fc4aae100d6ccb4000aa4c0
 Content-Type: application/json
 Authorization: Bearer {{auth_token}}
 

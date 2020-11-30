@@ -49,12 +49,12 @@ export default class Question extends BaseModel {
   }
 
   async delete(id: string) {
-    // const result = await questionCollection.deleteOne({_id: {$oid: id}})
-    // if (result) {
-    //   return 1
-    // } else {
-    //   return null
-    // }
+    const result = await questionCollection.deleteOne({_id: {$oid: id}})
+    if (result) {
+      return 1
+    } else {
+      return null
+    }
   }
 
   protected static prepare(data: any): Question {
