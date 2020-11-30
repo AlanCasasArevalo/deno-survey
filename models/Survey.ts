@@ -31,7 +31,9 @@ export default class Survey extends BaseModel {
   }
 
   async update({name, description}: { name: string, description: string }) {
-    const result = await surveyCollection.updateOne({_id: {$oid: this.id}}, {name, description})
+    const result = await surveyCollection.updateOne({_id: {$oid: this.id}}, {
+      $set: {name, description}
+    })
     if (result) {
       this.name = name
       this.description = description
