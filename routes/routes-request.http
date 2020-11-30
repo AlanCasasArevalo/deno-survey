@@ -82,7 +82,7 @@ Content-Type: application/json
 Authorization: Bearer {{auth_token}}
 
 {
-  "text": "How much you like Deno?",
+  "text": "How much you like Node?",
   "type": "choice",
   "required": true,
   "data": {
@@ -97,23 +97,12 @@ Authorization: Bearer {{auth_token}}
 }
 
 ###
-PUT http://localhost:8000/api/questions/5fc2376800a37d0500c7f0fe
+PUT http://localhost:8000/api/questions/5fc4883f00376e0800fd3e7e
 Content-Type: application/json
 Authorization: Bearer {{auth_token}}
 
 {
-  "text": "How much you like Deno?",
-  "type": "choice",
-  "required": true,
-  "data": {
-    "multiple": false,
-    "answers": [
-      "I love it",
-      "I like it",
-      "I don't like it",
-      "I hate it"
-    ]
-  }
+  "text": "How much you Love Node?"
 }
 
 ###

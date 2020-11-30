@@ -61,9 +61,19 @@ class QuestionController extends BaseSurveyController {
 
   // @ts-ignore
   async updateQuestion(ctx: RouterContext) {
-    response(ctx, 201, {
-      message: 'Hola desde updateSurvey'
-    })
+    const questionId = await ctx.params.id
+    const {text, type, required, data} = await ctx.request.body().value
+    const question = await Question.findQuestionById(questionId ? questionId : '')
+
+    if (question) {
+      await question.update(text, type, required, data)
+      response(ctx, 201, question)
+    } else {
+      response(ctx, 404, {
+        message: 'Lo sentimos no hemos podido recuperar el recurso'
+      })
+      return
+    }
   }
 
   // @ts-ignore

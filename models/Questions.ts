@@ -34,16 +34,18 @@ export default class Question extends BaseModel {
   }
 
   async update(text: string, type: QuestionType, required: boolean, data: Object) {
-    // const result = await questionCollection.updateOne({_id: {$oid: this.id}}, {text, type, required, data})
-    // if (result) {
-    //   this.text = text
-    //   this.type = type
-    //   this.required = required
-    //   this.data = data
-    //   return this
-    // } else {
-    //   return null
-    // }
+    const result = await questionCollection.updateOne({_id: {$oid: this.id}}, {
+      $set: {text, type, required, data}
+    })
+    if (result) {
+      this.text = text ? text : this.text
+      this.type = type ? type : this.type
+      this.required = required ? required : this.required
+      this.data = data ? data : this.data
+      return this
+    } else {
+      return null
+    }
   }
 
   async delete(id: string) {
