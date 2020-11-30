@@ -62,4 +62,62 @@ DELETE http://localhost:8000/api/survey/5fb94cf000b707090051ccb5
 Content-Type: application/json
 Authorization: Bearer {{auth_token}}
 
+#################################
+### QUESTIONS
+#################################
+
+###
+GET http://localhost:8000/api/survey/5fc2376800a37d0500c7f0fe/questions
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+###
+GET http://localhost:8000/api/questions/5fc2376800a37d0500c7f0fe
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+###
+POST http://localhost:8000/api/questions/5fc2376800a37d0500c7f0fe
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+  "text": "How much you like Deno?",
+  "type": "choice",
+  "required": true,
+  "data": {
+    "multiple": false,
+    "answers": [
+      "I love it",
+      "I like it",
+      "I don't like it",
+      "I hate it"
+    ]
+  }
+}
+
+###
+PUT http://localhost:8000/api/questions/5fc2376800a37d0500c7f0fe
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+  "text": "How much you like Deno?",
+  "type": "choice",
+  "required": true,
+  "data": {
+    "multiple": false,
+    "answers": [
+      "I love it",
+      "I like it",
+      "I don't like it",
+      "I hate it"
+    ]
+  }
+}
+
+###
+DELETE http://localhost:8000/api/questions/5fc2376800a37d0500c7f0fe
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
 
