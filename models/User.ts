@@ -1,3 +1,36 @@
-export default class User {
+import {usersCollection} from '../db/mongo.ts'
+import BaseModel from './BaseModel.ts'
 
+export default class User extends BaseModel {
+  public id?: string
+  public name: string
+  public email: string
+  public password: string
+
+  constructor({id = '', name = '', email = '', password = ''}) {
+    super()
+    this.id = id
+    this.name = name
+    this.email = email
+    this.password = password
+  }
+
+  static async findOne(params: any) {
+    const user = await usersCollection.findOne(params)
+    this.prepare(user)
+    return user
+  }
+
+  async save() {
+    delete this.id;
+    const { $oid } = await usersCollection.insertOne(this);
+    this.id = $oid;
+    return this;
+  }
+
+  protected static prepare (data: any): User {
+    data = BaseModel.prepare(data)
+    const user = new User(data)
+    return user
+  }
 }

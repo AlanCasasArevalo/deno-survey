@@ -1,18 +1,112 @@
+#################################
+### AUTH
+#################################
+
 ###
 POST http://localhost:8000/api/login
 Content-Type: application/json
 
 {
-  "name": "Alan",
   "email": "alan@test.com",
   "password": "123456"
 }
+
+> {% client.global.set("auth_token", response.body.token); %}
+
 ###
 POST http://localhost:8000/api/register
 Content-Type: application/json
 
 {
-  "name": "Alan",
-  "email": "alan@test.com",
+  "name": "Elsa",
+  "email": "elsa@test.com",
   "password": "123456"
 }
+
+#################################
+### SURVEY
+#################################
+
+###
+GET http://localhost:8000/api/survey
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+###
+GET http://localhost:8000/api/survey/5fc23600005d57b700c7f0fb
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+###
+POST http://localhost:8000/api/survey
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+  "name": "Survey C",
+  "description": "Lorem ipsum algo asi"
+}
+
+###
+PUT http://localhost:8000/api/survey/5fc232d1007baf380076fc57
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+  "name": "Survey 3",
+  "description": "Lorem ipsumsa"
+}
+
+###
+DELETE http://localhost:8000/api/survey/5fb94cf000b707090051ccb5
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+#################################
+### QUESTIONS
+#################################
+
+###
+GET http://localhost:8000/api/survey/5fc2376800a37d0500c7f0fe/questions
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+###
+GET http://localhost:8000/api/questions/5fc4883f00376e0800fd3e7e
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+###
+POST http://localhost:8000/api/questions/5fc2376800a37d0500c7f0fe
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+  "text": "How much you Love React?",
+  "type": "choice",
+  "required": true,
+  "data": {
+    "multiple": false,
+    "answers": [
+      "I love it",
+      "I like it",
+      "I don't like it",
+      "I hate it"
+    ]
+  }
+}
+
+###
+PUT http://localhost:8000/api/questions/5fc4883f00376e0800fd3e7e
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+  "text": "How much you Love Deno?"
+}
+
+###
+DELETE http://localhost:8000/api/questions/5fc4aae100d6ccb4000aa4c0
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
